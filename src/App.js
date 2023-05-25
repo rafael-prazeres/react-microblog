@@ -1,40 +1,24 @@
-export default function App() {
-  // const posts = []
-  const posts = [
-    {
-      id: 1,
-      text: 'Hello, world!',
-      timestamp: 'a minute ago',
-      author: {
-        username: 'susan',
-      },
-    },
-    {
-      id: 2,
-      text: 'Second post',
-      timestamp: 'an hour ago',
-      author: {
-        username: 'john',
-      },
-    },  
-  ];
+import Container from 'react-bootstrap/Container';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Header';
+import FeedPage from './pages/FeedPage';
+import ExplorePage from './pages/ExplorePage';
+import UserPage from './pages/UserPage';
+import LoginPage from './pages/LoginPage';
 
+export default function App() {
   return (
-    <>
-      <h1>Microblog</h1>
-      {posts.length !== 0 ?
-        posts.map(post => {
-          return (
-            <p key={post.id}>
-              <b>{post.author.username}</b> &mdash; {post.timestamp}
-              <br />
-              {post.text}
-            </p>
-          );
-        })
-      :
-        <p>There are no blog posts.</p>
-      }
-    </>
+    <Container fluid className="App">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<FeedPage />} />
+          <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/user/:username" element={<UserPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+      </BrowserRouter>
+    </Container>
   );
 }
