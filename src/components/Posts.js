@@ -2,22 +2,48 @@ import { useState, useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { useApi } from '../contexts/ApiProvider';
 import Post from './Post';
+import More from './More';
 
-export default function Posts() {
+export default function Posts({ content = 'feed' }) {
     const [posts, setPosts] = useState();
+    const [pagination, setPagination] = useState();
     const api = useApi();
+
+    let url;
+    switch (content) {
+        case 'feed':
+        case undefined:
+            url = '/feed';
+            break;
+        case 'explore':
+            url = '/posts';
+            break;
+        default:
+            url = `/users/${content}/posts`;
+    }
 
     useEffect(() => {
         (async () => {
-            const response = await api.get('/feed');
+            const response = await api.get(url);
             if (response.ok) {
                 setPosts(response.body.data);
+                setPagination(response.body.pagination);
             }
             else {
                 setPosts(null);
             }
         })();
-    }, [api]);
+    }, [api, url]);
+
+    const loadNextPage = async () => {
+        const response = await api.get(url, {
+            after: posts[posts.length -1].timestamp
+        });
+        if(response.ok) {
+            setPosts([...posts, ...response.body.data]);
+            setPagination(response.body.pagination);
+        }
+    };
 
     return (
         <>
@@ -34,6 +60,7 @@ export default function Posts() {
                                 :
                                 <p>There are no blog posts.</p>
                             }
+                            <More pagination={pagination} loadNextPage={loadNextPage}/>
                         </>
                     }
                 </>
