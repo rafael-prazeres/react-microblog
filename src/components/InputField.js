@@ -8,7 +8,7 @@ export default function InputField(
             {label && <Form.Label>{label}</Form.Label>}
             <Form.Control
                 type={type || 'text'}
-                placeholder="placeholder"
+                placeholder={placeholder}
                 ref={fieldRef} />
             <Form.Text className="text-danger">{error}</Form.Text>
         </Form.Group>
