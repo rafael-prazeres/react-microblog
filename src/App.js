@@ -7,11 +7,13 @@ import ExplorePage from './pages/ExplorePage';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import FlashProvider from './contexts/FlashProvider';
 
 export default function App() {
   return (
     <Container fluid className="App">
       <BrowserRouter>
+      <FlashProvider>
         <ApiProvider>
           <Header />
           <Routes>
@@ -23,6 +25,7 @@ export default function App() {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </ApiProvider>
+      </FlashProvider>
       </BrowserRouter>
     </Container>
   );
