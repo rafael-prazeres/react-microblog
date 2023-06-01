@@ -41,11 +41,13 @@ export default function LoginPage() {
         // console.log(`You entered ${username}:${password}`);
 
         const result = await login(username, password);
+        // console.log("result => " + result);
         if (result === 'fail') {
             flash('Invalid username or password', 'danger');
         }
         else if (result === 'ok') {
             let next = '/';
+            console.log("next => " + next);
             if (location.state && location.state.next) {
                 next = location.state.next;
             }

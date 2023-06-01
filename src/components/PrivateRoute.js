@@ -1,4 +1,4 @@
-import { useLocation, Navigate } from "react-router";
+import { useLocation, Navigate } from "react-router-dom";
 import { useUser } from '../contexts/UserProvider';
 
 export default function PrivateRoute({ children }) {
@@ -13,7 +13,8 @@ export default function PrivateRoute({ children }) {
     }
     else {
         const url = location.pathname + location.search + location.hash;
-        return <Navigate to="/login" state={{next: url}}/>
+        console.log("url => " + url);
+        return <Navigate to="/login" state={{next: url}} />
     }
 
 }
