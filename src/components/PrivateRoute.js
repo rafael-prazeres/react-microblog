@@ -13,7 +13,7 @@ export default function PrivateRoute({ children }) {
     }
     else {
         const url = location.pathname + location.search + location.hash;
-        console.log("url => " + url);
+        // console.log("url => " + url);
         return <Navigate to="/login" state={{next: url}} />
     }
 

@@ -24,7 +24,7 @@ export default function UserProvider({ children }) {
         if (result === 'ok') {
             const response = await api.get('/me');
             setUser(response.ok ? response.body : null);
-            return response.ok;
+            // return response.ok;
         }
         return result;
     };
