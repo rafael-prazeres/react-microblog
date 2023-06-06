@@ -1,10 +1,10 @@
 import Body from '../components/Body';
-import Post from '../components/Posts';
+import Posts from '../components/Posts';
 
 export default function FeedPage() {
     return (
         <Body sidebar>
-            <Post />
+            <Posts write={true} />
         </Body>
     );
 }

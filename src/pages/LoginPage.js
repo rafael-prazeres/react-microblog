@@ -47,7 +47,7 @@ export default function LoginPage() {
         }
         else if (result === 'ok') {
             let next = '/';
-            console.log("next => " + next);
+            // console.log("next => " + next);
             if (location.state && location.state.next) {
                 next = location.state.next;
             }
