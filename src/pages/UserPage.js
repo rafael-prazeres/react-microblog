@@ -72,7 +72,7 @@ export default function UserPage() {
                                 <Image src={user.avatar_url + '&s=128'} roundedCircle/>
                                 <div>
                                     <h1>{user.username}</h1>
-                                    {user.about_me && <h5>user.about_me</h5>}
+                                    {user.about_me && <h5>{user.about_me}</h5>}
                                     <p>
                                         Member since: <TimeAgo isoDate={user.first_seen}/>
                                         <br />
