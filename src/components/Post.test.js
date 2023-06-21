@@ -19,7 +19,7 @@ test ('it renders all the components of the post', () => {
     const message = screen.getByText('hello');
     const authorlink = screen.getByText('susan');
     const avatar = screen.getByAltText('susan');
-    const timestamp = screen.getByText(/.* ago$/);
+    const timestamp = screen.getByText(/.* passada$/);
 
     expect(message).toBeInTheDocument();
     expect(authorlink).toBeInTheDocument();
