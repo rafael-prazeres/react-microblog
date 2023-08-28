@@ -7,6 +7,7 @@ import ExplorePage from './pages/ExplorePage';
 import UserPage from './pages/UserPage';
 import LoginPage from './pages/LoginPage';
 import RegistrationPage from './pages/RegistrationPage';
+import CallbackPage from './pages/CallbackPage';
 import FlashProvider from './contexts/FlashProvider';
 import UserProvider from './contexts/UserProvider';
 import PrivateRoute from './components/PrivateRoute';
@@ -36,6 +37,9 @@ export default function App() {
               } />
               <Route path="/reset" element={
                 <PublicRoute><ResetPage /></PublicRoute>
+              } />
+              <Route path="/oauth2/api-sistemas/callback" element={
+                <PublicRoute><CallbackPage /></PublicRoute>
               } />
               <Route path="*" element={
                 <PrivateRoute>

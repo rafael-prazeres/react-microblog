@@ -12,7 +12,7 @@ export default function LoginPage() {
     const [formErrors, setFormErrors] = useState({});
     const usernameField = useRef();
     const passwordField = useRef();
-    const { login } = useUser();
+    const { login, loginSigaa } = useUser();
     const flash = useFlash();
     const navigate = useNavigate();
     const location = useLocation();
@@ -56,6 +56,20 @@ export default function LoginPage() {
 
     };
 
+    const handleLoginSigaa = async () => {
+        try {
+            // Gets authentication url from backend server
+            const result = await loginSigaa();
+            // console.log("LoginPage.handleLoginSigaa.loginSigaa = " + JSON.stringify(result));
+
+            // Navigate to consent screen
+            window.location.assign(result.body.url);
+
+        } catch (err) {
+          console.error(err);
+        }
+    }
+
     return (
         <Body>
             <h1>Login</h1>
@@ -68,6 +82,8 @@ export default function LoginPage() {
                     error={formErrors.password} fieldRef={passwordField} />
                 <Button variant="primary" type="submit">Login</Button>
             </Form>
+            <hr />
+            <Button variant="primary" type="button" onClick={handleLoginSigaa}>Login SIGAA</Button>
             <hr />
             <p>Forgot your password? You can <Link to="/reset-request">reset it</Link>.</p>
             <p>Don&apos;t have an account?<Link to="/register">Register here</Link>!</p>

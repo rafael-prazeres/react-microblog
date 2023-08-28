@@ -90,6 +90,23 @@ export default class MicroblogApiClient {
         return 'ok';
     }
 
+    async loginSigaa() {
+        const response = await this.get('/tokens/oauth2/api-sistemas', null, {});
+        console.log("MicroblogApiClient.loginSigaa = " + JSON.stringify(response));
+        return response;
+    }
+
+    async loginSigaaCallback(code, state) {
+        // console.log("code = "+ code + " state = " + state);
+        const response = await this.post('/tokens/oauth2/api-sistemas', { code: code, state: state }, {});
+        console.log("MicroblogApiClient.loginSigaaCallback = " + JSON.stringify(response));
+        if (!response.ok) {
+            return response.status === 401 ? 'fail' : 'error';
+        }
+        localStorage.setItem('accessToken', response.body.access_token);
+        return 'ok';
+    }
+
     async logout() {
         await this.delete('/tokens');
         localStorage.removeItem('accessToken');
